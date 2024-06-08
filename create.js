@@ -135,14 +135,53 @@ async function run() {
 
 // <----------------------count()  method ------------------------>
 
+// try{
+//   await client.connect();
+//      const db = client.db("employee")
+//   const collection = db.collection("employee_info")
+  // const res = await collection.count() // return number of collections 
+  // const res = await collection.count({age:18})   // deprecated
+  // const res = await collection.countDocuments({age:18})
+
+
+//   console.log(res);
+// }
+
+
+// <----------------------drop collection ------------------------>
+
+// try{
+//   await client.connect();
+//     const db = client.db("students")
+//     const collection = db.collection("student_info")
+//     const res = await collection.drop() // drop the database
+//     console.log(res);
+// }
+
+
+// <--------------------- distinct() method --------------> 
+// MongoDB distinct() method finds the distinct values for a given field 
+// across a single collection and returns the results in an array.
+
+// try{
+//   await client.connect();
+//     const db = client.db("employee")
+//     const collection = db.collection("employee_info")
+//     // const res = await collection.distinct("name")  // return array of distinct names 
+//     const res = await collection.distinct("age")
+//     console.log(res);
+// }
+
+// <--------------------- limit() method --------------> 
+// the limit() method limits the number of records or documents that you want.
+//  It basically defines the max limit of records/documents that you want.
 try{
   await client.connect();
-     const db = client.db("employee")
-  const collection = db.collection("employee_info")
-  // const res = await collection.count() // return number of collections 
-  const res = await collection.count({age:18})
-
-  console.log(res);
+    const db = client.db("employee")
+    const collection = db.collection("employee_info")
+    // const res = await collection.find().limit(0) // no limit
+    const res = await collection.find().limit(3)
+    console.log(res);
 }
 catch(err){
   console.log(err);
