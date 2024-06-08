@@ -98,9 +98,51 @@ async function run() {
 // console.log(collection);
 // }
 
+// <---------------------- copyTo() ------------------------>
+// copyTo() method is used to copies all the documents from one collection(Source collection)
+//  to another collection(Target collection) using server-side JavaScript and if that other 
+//  collection(Target collection) is not present then MongoDB
+//  creates a new collection with that name. This method uses eval command internally.     
+// try{
+//   await client.connect();
+//     const db1 = client.db("employee");
+//     const sourceCollection = db1.collection("employee_info");
+//     const db2 = client.db("students");
+//     const destCollection = db2.collection("student_info");
+    
+
+//         // Fetch all documents from the source collection
+//         const documents  = await sourceCollection.find().toArray();
+//        if(documents.length>0){
+//         const res = await destCollection.insertMany(documents);
+//         console.log(`${res.insertedCount} documents were copied to the destination collection.`);
+//        }else{
+//         console.log("No documents found.");
+//        }
+
+// }
+
+// <---------------------- delete one/many item ------------------------>
+
+// try{
+//    await client.connect();
+//    const db = client.db("employee")
+// const collection = db.collection("student_info")
+// const res = await collection.deleteMany({age:28})
+// console.log(res);
+// }
+
+
+// <----------------------count()  method ------------------------>
 
 try{
+  await client.connect();
+     const db = client.db("employee")
+  const collection = db.collection("employee_info")
+  // const res = await collection.count() // return number of collections 
+  const res = await collection.count({age:18})
 
+  console.log(res);
 }
 catch(err){
   console.log(err);
@@ -111,3 +153,15 @@ catch(err){
 }
 
 run().catch(console.dir);
+
+
+
+
+
+
+
+
+
+
+
+
