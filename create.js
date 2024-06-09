@@ -1,8 +1,11 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
+const id = new ObjectId(); // create global object id
 
+// console.log(id);
 const uri = "mongodb://localhost:27017";
 async function run() {
   const client = new MongoClient(uri);
+
 
 
   // <------------------------ insert one item ---------------------------->
@@ -172,16 +175,36 @@ async function run() {
 //     console.log(res);
 // }
 
-// <--------------------- limit() method --------------> 
+// <--------------------- limit() and skip() method --------------> 
 // the limit() method limits the number of records or documents that you want.
 //  It basically defines the max limit of records/documents that you want.
+
+// the skip() method will skip the first n document from the query result, 
+// you just need to pass the number of records/documents to be skipped
+
+  // THESE BOTH METHODS ARE USEFUL WITH OTHER METHODS LIKE FINDONE ETC 
+// try{
+//   await client.connect();
+//     const db = client.db("employee")
+//     const collection = db.collection("employee_info")
+    // const res = await collection.find().limit(0) // no limit
+    // const res = await collection.find().limit(3).skip(1)
+    // console.log(res);
+// }
+
+
+
+// <--------------------- createIndex()/ listIndexes() method --------------> 
+
 try{
   await client.connect();
     const db = client.db("employee")
     const collection = db.collection("employee_info")
-    // const res = await collection.find().limit(0) // no limit
-    const res = await collection.find().limit(3)
-    console.log(res);
+    const res = await collection.createIndex({role :1}) // it will create index on role feild 
+    // const res1 = await collection.dropIndex("name_1")
+    const res2 = await collection.listIndexes().toArray()
+    // console.log(res1);
+    // console.log(res2);
 }
 catch(err){
   console.log(err);
